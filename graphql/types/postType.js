@@ -7,6 +7,7 @@ const postType = new GraphQLObjectType({
         id: { type: GraphQLInt },
         title: { type: GraphQLString },
         body: { type: GraphQLString },
+        edited: { type: GraphQLInt},
         createdAt: { type: GraphQLString },
         updatedAt: { type: GraphQLString },
         author: { 

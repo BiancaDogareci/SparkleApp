@@ -2,30 +2,24 @@
 import {
   Model
 } from 'sequelize';
-
 export default (sequelize, DataTypes) => {
-  class Post extends Model {
+  class PostLabel extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Post.belongsTo(models.User, {
-        foreignKey: 'userId',
-      });
-      Post.belongsToMany(models.Label, { through: 'PostLabel' });
       // define association here
     }
   }
-  Post.init({
-    title: DataTypes.STRING,
-    body: DataTypes.STRING,
-    userId: DataTypes.INTEGER,
-    edited: DataTypes.INTEGER
+  PostLabel.init({
+    postId: DataTypes.INTEGER,
+    labelId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Post',
+    modelName: 'PostLabel',
+    timestamps: false
   });
-  return Post;
+  return PostLabel;
 };
