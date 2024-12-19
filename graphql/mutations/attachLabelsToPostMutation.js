@@ -19,30 +19,34 @@ const attachLabelsToPostMutationResolver = async (_, {postId, labels}, context) 
         return false;
     }
 
-    const labelsToAdd = await Promise.all(labels.map(async (label) => {
-        const foundLabel = await db.Label.findOne({
-                            where: {
-                                name: label
-                            }
-                        });
-        if(!foundLabel){
-            const createdLabel = await db.Label.create({
-                                    name: label,
-                                    usage: 0,
-                                });
-            return createdLabel;
-        }else{
-            const usage = foundLabel.usage + 1;
-            const updatedLabel = await foundLabel.update({
-                usage: usage,
-            });
-            return updatedLabel;
-        }
-    })); 
-
-    await post.addLabels(labelsToAdd);  
-
-    return true;
+    if(context.user_id===post.userId){
+        const labelsToAdd = await Promise.all(labels.map(async (label) => {
+            const foundLabel = await db.Label.findOne({
+                                where: {
+                                    name: label
+                                }
+                            });
+            if(!foundLabel){
+                const createdLabel = await db.Label.create({
+                                        name: label,
+                                        usage: 0,
+                                    });
+                return createdLabel;
+            }else{
+                const usage = foundLabel.usage + 1;
+                const updatedLabel = await foundLabel.update({
+                    usage: usage,
+                });
+                return updatedLabel;
+            }
+        })); 
+    
+        await post.addLabels(labelsToAdd);  
+    
+        return true;
+    }else{
+        return false;
+    }
 }
 
 const attachLabelsToPostMutation = {
