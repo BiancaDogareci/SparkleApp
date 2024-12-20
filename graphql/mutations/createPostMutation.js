@@ -13,10 +13,30 @@ const createPostMutationResolver = async (_, { post }, context) => {
        title: post.title,
        body: post.body,
        userId: context.user_id,
+       edited: 0,
     });
-
-    return createdPost;
-    
+    const labels = await Promise.all(post.labels.map(async (label) => {
+                                        const foundLabel = await db.Label.findOne({
+                                                            where: {
+                                                                name: label
+                                                            }
+                                                        });
+                                        if(!foundLabel){
+                                            const createdLabel = await db.Label.create({
+                                                                    name: label,
+                                                                    usage: 0,
+                                                                });
+                                            return createdLabel;
+                                        }else{
+                                            const usage = foundLabel.usage + 1;
+                                            const updatedLabel = await foundLabel.update({
+                                                usage: usage,
+                                            });
+                                            return updatedLabel;
+                                        }
+                                    })); 
+    await createdPost.addLabels(labels);         
+    return createdPost;  
 }
 
 const createPostMutation = {
