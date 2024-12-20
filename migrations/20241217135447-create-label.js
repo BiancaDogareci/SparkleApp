@@ -3,30 +3,33 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Labels', {
-      id: {
+      labelId: {  // Renamed 'id' to 'labelId' to match the model
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,  // Set to true since it's not explicitly required in the model
       },
       usage: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,  // Set to true based on the model definition
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,  // Default timestamp for createdAt
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,  // Default timestamp for updatedAt
+      },
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Labels');
   }

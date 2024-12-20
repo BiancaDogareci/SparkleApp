@@ -1,55 +1,55 @@
-import {GraphQLInt} from 'graphql';
+import { GraphQLInt } from 'graphql';
 import postInputType from '../types/postInputType.js';
 import postType from '../types/postType.js';
 import db from '../../models/index.js';
 
 const updatePostMutationResolver = async (_, args, context) => {
-    const isAuthorized = !!context.user_id
-   
-    if(!isAuthorized) {
-        return false;
+    const isAuthorized = !!context.user_id;
+
+    if (!isAuthorized) {
+        throw new Error("Unauthorized");  // Throw error for unauthorized access
     }
 
     const userId = context.user_id;
 
-    const id = args.id;
+    const postId = args.id;
 
+    // Fetch the post by ID
     const post = await db.Post.findOne({
         where: {
-            id,
+            postId,  // Make sure you're querying by postId (not id)
         }
     });
 
-    if(!post){
-        return false;
+    if (!post) {
+        throw new Error("Post not found");  // Throw error if post does not exist
     }
 
-
-    if(userId===post.userId){
-        const updated_post = {
+    // Ensure that the post belongs to the authenticated user
+    if (userId === post.userId) {
+        // Prepare the updated fields
+        const updatedPostData = {
             title: args.post.title,
             body: args.post.body,
-            edited: 1,
-        }
-    
-        const updatedPost = await post.update(updated_post);
-    
+            edited: 1,  // Mark as edited
+        };
+
+        // Update the post in the database
+        const updatedPost = await post.update(updatedPostData);
+
         return updatedPost;
-
-    }else{
-        return post;
+    } else {
+        throw new Error("You are not authorized to edit this post");  // Throw error for unauthorized access
     }
-
 }
-
 
 const updatePostMutation = {
     type: postType,
     args: {
-        id: {type:GraphQLInt},
-        post: {type: postInputType}
+        id: { type: GraphQLInt },  // Post ID
+        post: { type: postInputType }  // Post input data
     },
     resolve: updatePostMutationResolver,
-}
+};
 
 export default updatePostMutation;

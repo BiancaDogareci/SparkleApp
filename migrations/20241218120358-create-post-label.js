@@ -9,8 +9,11 @@ module.exports = {
           model: {
             tableName: 'Posts',
           },
-          key: 'id',
-        }
+          key: 'postId', // Match the foreign key in the Post model
+        },
+        onDelete: 'CASCADE', // Remove associations if the post is deleted
+        primaryKey: true, // Composite primary key: this + labelId
+        field: 'postId', // Map this column to Sequelize's expected name
       },
       labelId: {
         type: Sequelize.INTEGER,
@@ -18,11 +21,25 @@ module.exports = {
           model: {
             tableName: 'Labels',
           },
-          key: 'id',
-        }
-      }
+          key: 'labelId', // Match the foreign key in the Label model
+        },
+        onDelete: 'CASCADE', // Remove associations if the label is deleted
+        primaryKey: true, // Composite primary key
+        field: 'labelId', // Map this column to Sequelize's expected name
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW,
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW,
+      },
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('PostLabels');
   }
