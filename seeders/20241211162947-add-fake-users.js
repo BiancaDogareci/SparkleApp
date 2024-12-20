@@ -3,24 +3,25 @@ const { faker } = require('@faker-js/faker');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     const mockUsers = new Array(100).fill().map(() => {
       return {
-        userName: faker.internet.userName(),
-        email: faker.internet.email(),
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
+        name: faker.internet.username(),
         password: faker.internet.password(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
+        createdAt: Date(),
+        updatedAt: Date(),
+      }
     });
 
     await queryInterface.bulkInsert('Users', mockUsers, {});
   },
 
-  async down(queryInterface, Sequelize) {
-    // Rollback the seeded data
-    await queryInterface.bulkDelete('Users', null, {});
+  async down (queryInterface, Sequelize) {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
   }
 };

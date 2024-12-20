@@ -15,12 +15,6 @@ export default (sequelize, DataTypes) => {
     }
   }
   Label.init({
-    labelId:{
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      allowNull: false,
-      autoIncrement: true,  // Ensure this is auto-incrementing
-    }, 
     name: DataTypes.STRING,
     usage: DataTypes.INTEGER
   }, {

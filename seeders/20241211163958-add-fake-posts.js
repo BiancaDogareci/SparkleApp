@@ -3,22 +3,28 @@ const { faker } = require('@faker-js/faker');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    const mockPosts = new Array(100).fill().map(() => {
+  async up (queryInterface, Sequelize) {
+
+    const posts = new Array(100).fill().map(() => {
       return {
-        title: faker.lorem.sentence(),
-        content: faker.lorem.paragraph(),
-        edited: faker.datatype.boolean(),
-        userId: faker.number.int({ min: 1, max: 100 }),  // Use faker.number.int() instead of faker.datatype.number()
+        title: faker.book.title(),
+        body: faker.commerce.productDescription(),
+        userId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
-      };
+        edited: 0,
+      }
     });
 
-    await queryInterface.bulkInsert('Posts', mockPosts, {});
+    await queryInterface.bulkInsert('Posts', posts, {});
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Posts', null, {});
+  async down (queryInterface, Sequelize) {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
   }
 };

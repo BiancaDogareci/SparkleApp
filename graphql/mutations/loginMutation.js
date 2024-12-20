@@ -8,7 +8,7 @@ import bcrypt from 'bcrypt';
 const loginMutationResolver = async (_, args) => {
     const user = await db.User.findOne({
         where: {
-            userName: args.credentials.username,
+            name: args.credentials.username,
         }
     });
 
@@ -31,10 +31,7 @@ const loginMutationResolver = async (_, args) => {
         }
     }
     
-    const token = jwt.sign({ user_id: user.userId }, JWT_SECRET);
-
-    console.log("Generated Token:", token); // Log the token to see its structure
-    
+    const token = jwt.sign({ user_id: user.id }, JWT_SECRET);
     
     return {
         token,
