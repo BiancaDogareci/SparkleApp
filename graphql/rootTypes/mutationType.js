@@ -10,8 +10,11 @@ import createLabelMutation from '../mutations/createLabelMutation.js';
 import updateLabelMutation from '../mutations/updateLabelMutation.js';
 import deleteLabelMutation from '../mutations/deleteLabelMutation.js';
 import attachLabelsToPostsMutation from '../mutations/attachLabelsToPostMutation.js'
+import createCommentMutation from '../mutations/createCommentMutation.js';
+import updateCommentMutation from '../mutations/updateCommentMutation.js';
+import deleteCommentMutation from '../mutations/deleteCommentMutation.js';
 
-// Define the Query type
+
 const queryType = new graphql.GraphQLObjectType({
     name: "Mutation",
     fields: {
@@ -26,6 +29,9 @@ const queryType = new graphql.GraphQLObjectType({
         updateLabel: updateLabelMutation,
         deleteLabel: deleteLabelMutation,
         attachLabelsToPosts: attachLabelsToPostsMutation,
+        createComment: createCommentMutation,
+        updateComment: updateCommentMutation,
+        deleteComment: deleteCommentMutation,
     }
 });
 

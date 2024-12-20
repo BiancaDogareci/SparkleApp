@@ -2,6 +2,7 @@ import {GraphQLInt} from 'graphql';
 import postInputType from '../types/postInputType.js';
 import postType from '../types/postType.js';
 import db from '../../models/index.js';
+import { attachLabelsToPost } from './attachLabelsToPost.js';
 
 const updatePostMutationResolver = async (_, args, context) => {
     const isAuthorized = !!context.user_id
@@ -31,8 +32,10 @@ const updatePostMutationResolver = async (_, args, context) => {
             body: args.post.body,
             edited: 1,
         }
-    
+
+        await attachLabelsToPost(post.id,args.post.labels);
         const updatedPost = await post.update(updated_post);
+        
     
         return updatedPost;
 
