@@ -2,35 +2,29 @@
 import {
   Model
 } from 'sequelize';
+
 export default (sequelize, DataTypes) => {
-  class PostLabel extends Model {
+  class Comment extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-
-      PostLabel.belongsTo(models.Post, {
-        foreignKey: 'postId', 
-        onDelete: 'CASCADE',
+       Comment.belongsTo(models.User, {
+        foreignKey: 'userId',
       });
-
-    
-      PostLabel.belongsTo(models.Label, {
-        foreignKey: 'labelId',  
-        onDelete: 'CASCADE',  
-      });
+      Comment.belongsTo(models.Post, { foreignKey:'postId'});
     }
   }
-  
-  PostLabel.init({
+  Comment.init({
+    body: DataTypes.STRING,
+    userId: DataTypes.INTEGER,
     postId: DataTypes.INTEGER,
-    labelId: DataTypes.INTEGER
+    edited: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'PostLabel',
-    timestamps: false
+    modelName: 'Comment',
   });
-  return PostLabel;
+  return Comment;
 };

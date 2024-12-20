@@ -10,12 +10,18 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasMany(models.Post);
+      User.hasMany(models.Comment, {
+        foreignKey: 'userId',
+      });
     }
   }
   User.init({
     name: DataTypes.STRING,
-    password: DataTypes.STRING
-  }, {
+    password: DataTypes.STRING,
+    username:DataTypes.STRING,
+    email:DataTypes.STRING
+  }, 
+  {
     sequelize,
     modelName: 'User',
   });

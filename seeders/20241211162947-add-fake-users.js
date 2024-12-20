@@ -8,6 +8,8 @@ module.exports = {
       return {
         name: faker.internet.username(),
         password: faker.internet.password(),
+        username:faker.internet.username(),
+        email:faker.internet.email(),
         createdAt: Date(),
         updatedAt: Date(),
       }

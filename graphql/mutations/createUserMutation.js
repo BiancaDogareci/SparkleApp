@@ -9,6 +9,8 @@ const createUserMutationResolver = async (_, { user }, context) => {
     const createdUser = await db.User.create({
         name: user.name,
         password: password,
+        username:user.username,
+        email:user.email,
     });
 
     return createdUser;

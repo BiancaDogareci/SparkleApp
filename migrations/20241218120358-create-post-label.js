@@ -7,22 +7,27 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: 'Posts',
+            tableName: 'Posts', 
           },
           key: 'id',
-        }
+        },
+        onDelete: 'CASCADE',
+        primaryKey: true, 
       },
       labelId: {
         type: Sequelize.INTEGER,
         references: {
           model: {
-            tableName: 'Labels',
+            tableName: 'Labels', 
           },
           key: 'id',
-        }
-      }
+        },
+        onDelete: 'CASCADE', 
+        primaryKey: true, 
+      },
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('PostLabels');
   }
