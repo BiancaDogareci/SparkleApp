@@ -7,13 +7,14 @@ module.exports = {
   async up(queryInterface, Sequelize) {
 
     const comments = [];
-    const numComments = 50; 
+    const numComments = 30; 
 
     for (let i = 0; i < numComments; i++) {
       comments.push({
         body: faker.lorem.sentence(), 
         userId: faker.number.int({ min: 1, max: 100 }), 
         postId: faker.number.int({ min: 1, max: 30 }), 
+        parentCommentId: null,
         edited: faker.datatype.boolean(),
         createdAt: new Date(), 
         updatedAt: new Date(),

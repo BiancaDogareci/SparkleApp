@@ -10,13 +10,11 @@ export default (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-
       PostLabel.belongsTo(models.Post, {
         foreignKey: 'postId', 
         onDelete: 'CASCADE',
       });
 
-    
       PostLabel.belongsTo(models.Label, {
         foreignKey: 'labelId',  
         onDelete: 'CASCADE',  

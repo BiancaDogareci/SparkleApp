@@ -7,31 +7,51 @@ const createCommentMutationResolver = async (_, { comment }, context) => {
   const isAuthorized = !!context.user_id;
 
   if (!isAuthorized) {
-    return false; 
+    return false;
   }
 
   try {
+    if (comment.parentCommentId) {
+      const parentComment = await db.Comment.findByPk(comment.parentCommentId);
+
+      if (!parentComment) {
+        console.log("Nu exista comentariu cu acel id introdus ca parentCommentId.");
+        return null;
+      }
+
+      if (parentComment.parentCommentId !== null) {
+        console.log("Comentarii la comentarii la comentarii nu sunt permise (adancime maxima = 2, comentarii la postari sau comentarii la comentarii).");
+        return null;
+      }
+
+      if (parentComment.postId !== comment.postId) {
+        console.log("Comentariul parinte si comentariul copil trebuie sa apartina aceleiasi postari.");
+        return null;
+      }
+    }
+
     const newComment = await db.Comment.create({
       body: comment.body,   
       userId: context.user_id, 
       postId: comment.postId, 
-      edited: comment.edited || false,  
+      parentCommentId: comment.parentCommentId || null,
+      edited: false,  
     });
 
-    return newComment;  
+    return newComment;
   } catch (error) {
     console.error(error);
-    return null;  
+    return null;
   }
 };
 
 
 const createCommentMutation = {
-  type: commentType,  
+  type: commentType,
   args: {
-    comment: { type: commentInputType }, 
+    comment: { type: commentInputType },
   },
-  resolve: createCommentMutationResolver, 
+  resolve: createCommentMutationResolver,
 };
 
 export default createCommentMutation;
