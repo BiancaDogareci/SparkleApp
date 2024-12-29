@@ -7,6 +7,8 @@ import labelQuery from '../queries/labelQuery.js';
 import labelsQuery from '../queries/labelsQuery.js';
 import commentQuery from '../queries/commentQuery.js';
 import commentsQuery from '../queries/commentsQuery.js';
+import profileQuery from '../queries/profileQuery.js';
+import profilesQuery from '../queries/profilesQuery.js';
 
 const queryType = new GraphQLObjectType({
     name: "Query",
@@ -22,6 +24,9 @@ const queryType = new GraphQLObjectType({
         
         comment: commentQuery,
         comments: commentsQuery,
+
+        profile: profileQuery,
+        profiles: profilesQuery
     },
 });
 
