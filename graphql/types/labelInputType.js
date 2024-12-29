@@ -1,4 +1,4 @@
-import {GraphQLInputObjectType, GraphQLString, GraphQLInt} from 'graphql';
+import { GraphQLInputObjectType, GraphQLString, GraphQLInt } from 'graphql';
 
 const labelInputType = new GraphQLInputObjectType({
     name: "LabelInput",

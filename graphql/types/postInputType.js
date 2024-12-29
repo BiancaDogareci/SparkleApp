@@ -1,4 +1,4 @@
-import {GraphQLInputObjectType, GraphQLString, GraphQLList} from 'graphql';
+import { GraphQLInputObjectType, GraphQLString, GraphQLList } from 'graphql';
 
 const postInputType = new GraphQLInputObjectType({
     name: 'PostInput',

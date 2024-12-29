@@ -1,6 +1,5 @@
-import {GraphQLBoolean, GraphQLInt} from 'graphql';
+import { GraphQLBoolean, GraphQLInt } from 'graphql';
 import db from '../../models/index.js';
-
 
 const deleteCommentMutationResolver = async (_, args, context) => {
   const isAuthorized = !!context.user_id

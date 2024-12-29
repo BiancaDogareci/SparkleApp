@@ -1,6 +1,4 @@
-import {GraphQLObjectType, GraphQLInt} from 'graphql';
-import postType from './postType.js';
-import labelType from './labelType.js';
+import { GraphQLObjectType, GraphQLInt } from 'graphql';
 
 const postlabelType = new GraphQLObjectType({
     name: 'PostLabel',

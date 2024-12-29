@@ -31,4 +31,5 @@ export const commentType = new GraphQLObjectType({
     }
   })
 });
+
 export default commentType;

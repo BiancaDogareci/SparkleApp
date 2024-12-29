@@ -1,4 +1,4 @@
-import {GraphQLBoolean, GraphQLInt} from 'graphql';
+import { GraphQLBoolean, GraphQLInt } from 'graphql';
 import db from '../../models/index.js';
 
 const deletePostMutationResolver = async (_, args, context) => {

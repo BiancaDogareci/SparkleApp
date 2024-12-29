@@ -1,4 +1,4 @@
-import {GraphQLInputObjectType, GraphQLInt} from 'graphql';
+import { GraphQLInputObjectType, GraphQLInt } from 'graphql';
 
 const postlabelInputType = new GraphQLInputObjectType({
     name: 'PostLabelInput',

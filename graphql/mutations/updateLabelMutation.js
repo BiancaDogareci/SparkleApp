@@ -1,4 +1,4 @@
-import {GraphQLInt} from 'graphql';
+import { GraphQLInt } from 'graphql';
 import labelInputType from '../types/labelInputType.js';
 import labelType from '../types/labelType.js';
 import db from '../../models/index.js';
