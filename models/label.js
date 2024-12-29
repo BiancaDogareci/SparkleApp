@@ -11,7 +11,10 @@ export default (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Label.belongsToMany(models.Post, { through: 'PostLabel', onDelete: 'CASCADE',});
+      Label.belongsToMany(models.Post, { 
+        through: 'PostLabel', 
+        onDelete: 'CASCADE',
+      });
     }
   }
   Label.init({

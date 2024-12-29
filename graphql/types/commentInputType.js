@@ -6,7 +6,7 @@ export const commentInputType = new GraphQLInputObjectType({
   fields: () => ({
     body: { type: GraphQLString },
     postId: { type: GraphQLInt },
-    edited: { type: GraphQLBoolean }
+    parentCommentId: { type: GraphQLInt }
   })
 });
 export default commentInputType;

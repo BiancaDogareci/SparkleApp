@@ -9,6 +9,7 @@ export const commentType = new GraphQLObjectType({
     body: { type: GraphQLString },
     userId: { type: GraphQLInt },
     postId: { type: GraphQLInt },
+    parentCommentId: { type: GraphQLInt },
     edited: { type: GraphQLBoolean },
     user: {
       type: userType, 
@@ -20,6 +21,12 @@ export const commentType = new GraphQLObjectType({
       type: postType, 
       resolve(parentValue) {
         return parentValue.getPost(); 
+      }
+    },
+    parentComment: {
+      type: commentType,
+      resolve(parentValue) {
+        return parentValue.getParentComment();
       }
     }
   })

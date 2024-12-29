@@ -30,6 +30,15 @@ module.exports = {
         },
         onDelete: 'CASCADE', 
       },
+      parentCommentId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Comments', 
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+      },
       edited: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

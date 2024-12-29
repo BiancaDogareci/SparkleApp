@@ -14,8 +14,15 @@ export default (sequelize, DataTypes) => {
       Post.belongsTo(models.User, {
         foreignKey: 'userId',
       });
-      Post.belongsToMany(models.Label, { through: 'PostLabel', onDelete: 'CASCADE',});
-      Post.hasMany(models.Comment,{foreignKey: 'postId',});
+
+      Post.belongsToMany(models.Label, { 
+        through: 'PostLabel', 
+        onDelete: 'CASCADE',
+      });
+      
+      Post.hasMany(models.Comment,{
+        foreignKey: 'postId',
+      });
     }
   }
   Post.init({
