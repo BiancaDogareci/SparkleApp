@@ -1,6 +1,5 @@
 import db from '../../models/index.js';
-import {GraphQLBoolean, GraphQLInt, GraphQLList, GraphQLString} from 'graphql';
-
+import { GraphQLBoolean, GraphQLInt, GraphQLList, GraphQLString } from 'graphql';
 
 const attachLabelsToPostMutationResolver = async (_, {postId, labels}, context) => {
     const isAuthorized = !!context.user_id

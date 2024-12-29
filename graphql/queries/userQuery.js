@@ -1,4 +1,4 @@
-import {GraphQLInt} from 'graphql';
+import { GraphQLInt } from 'graphql';
 import userType from '../types/userType.js';
 import db from '../../models/index.js';
 

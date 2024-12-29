@@ -1,6 +1,5 @@
-import {GraphQLBoolean, GraphQLInt} from 'graphql';
+import { GraphQLBoolean, GraphQLInt } from 'graphql';
 import db from '../../models/index.js';
-
 
 const deleteLabelMutationResolver = async (_, args, context) => {
     const label = await db.Label.findOne({

@@ -45,7 +45,6 @@ const createCommentMutationResolver = async (_, { comment }, context) => {
   }
 };
 
-
 const createCommentMutation = {
   type: commentType,
   args: {

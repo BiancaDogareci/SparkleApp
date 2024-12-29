@@ -51,7 +51,6 @@ const deleteUserResolver = async (_, args, context) => {
     return true;
 };
 
-
 const deleteUserMutation = {
     type: GraphQLBoolean,
     args: {

@@ -1,5 +1,4 @@
-import { GraphQLInputObjectType, GraphQLInt, GraphQLString, GraphQLBoolean } from 'graphql';
-
+import { GraphQLInputObjectType, GraphQLInt, GraphQLString } from 'graphql';
 
 export const commentInputType = new GraphQLInputObjectType({
   name: 'CommentInput',
@@ -9,4 +8,5 @@ export const commentInputType = new GraphQLInputObjectType({
     parentCommentId: { type: GraphQLInt }
   })
 });
+
 export default commentInputType;

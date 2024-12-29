@@ -1,4 +1,4 @@
-import {GraphQLInt} from 'graphql';
+import { GraphQLInt } from 'graphql';
 import db from '../../models/index.js';
 import postType from '../types/postType.js';
 
