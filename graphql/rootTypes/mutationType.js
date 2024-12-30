@@ -13,6 +13,9 @@ import attachLabelsToPostsMutation from '../mutations/attachLabelsToPostMutation
 import createCommentMutation from '../mutations/createCommentMutation.js';
 import updateCommentMutation from '../mutations/updateCommentMutation.js';
 import deleteCommentMutation from '../mutations/deleteCommentMutation.js';
+import createProfileMutation from '../mutations/createProfileMutation.js';
+import updateProfileMutation from '../mutations/updateProfileMutation.js';
+import deleteProfileMutation from '../mutations/deleteProfileMutation.js';
 
 const queryType = new graphql.GraphQLObjectType({
     name: "Mutation",
@@ -36,6 +39,10 @@ const queryType = new graphql.GraphQLObjectType({
         createComment: createCommentMutation,
         updateComment: updateCommentMutation,
         deleteComment: deleteCommentMutation,
+
+        createProfile: createProfileMutation,
+        updateProfile: updateProfileMutation,
+        deleteProfile: deleteProfileMutation
     }
 });
 

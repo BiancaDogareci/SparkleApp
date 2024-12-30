@@ -14,8 +14,13 @@ export default (sequelize, DataTypes) => {
       });
 
       User.hasMany(models.Comment, {
-        foreignKey: 'userId',
+        foreignKey: 'userId'
       });
+
+      User.hasOne(models.Profile, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      });      
     }
   }
   User.init({
