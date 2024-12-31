@@ -21,13 +21,30 @@ export default (sequelize, DataTypes) => {
       });
     }
   }
-  LikePost.init({
-    userId: DataTypes.INTEGER,
-    postId: DataTypes.INTEGER,
-    givenAt: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'LikePost',
-  });
+
+  LikePost.init(
+    {
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true, // Parte din PK compusa
+      },
+      postId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true, // Parte din PK compusa
+      },
+      givenAt: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
+    },
+    {
+      sequelize,
+      modelName: 'LikePost',
+      timestamps: false, // Disable createdAt si updatedAt pt ca le am sters si din migrare
+    }
+  );
+
   return LikePost;
 };
