@@ -28,7 +28,7 @@ export default (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'PostLabel',
-    timestamps: false
+    timestamps: false // Disable createdAt si updatedAt pt ca le am sters si din migrare
   });
   return PostLabel;
 };

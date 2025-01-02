@@ -9,6 +9,9 @@ import commentQuery from '../queries/commentQuery.js';
 import commentsQuery from '../queries/commentsQuery.js';
 import profileQuery from '../queries/profileQuery.js';
 import profilesQuery from '../queries/profilesQuery.js';
+import allLikesOfPostsQuery from '../queries/likepostsQuery.js';
+import likesOfAPostQuery from '../queries/likepostOfAPostQuery.js';
+import likesOfAUserQuery from '../queries/likepostOfAUserQuery.js';
 
 const queryType = new GraphQLObjectType({
     name: "Query",
@@ -26,7 +29,11 @@ const queryType = new GraphQLObjectType({
         comments: commentsQuery,
 
         profile: profileQuery,
-        profiles: profilesQuery
+        profiles: profilesQuery,
+
+        allLikesOfPosts: allLikesOfPostsQuery,
+        likesOfAPost: likesOfAPostQuery,
+        likesOfAUser: likesOfAUserQuery
     },
 });
 
