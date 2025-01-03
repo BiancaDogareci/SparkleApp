@@ -23,6 +23,11 @@ export default (sequelize, DataTypes) => {
       Post.hasMany(models.Comment,{
         foreignKey: 'postId',
       });
+
+      Post.hasMany(models.LikePost, {
+        foreignKey: 'postId',
+        onDelete: 'CASCADE',
+      });
     }
   }
   Post.init({

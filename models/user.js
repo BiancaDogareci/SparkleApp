@@ -20,7 +20,12 @@ export default (sequelize, DataTypes) => {
       User.hasOne(models.Profile, {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
-      });      
+      });   
+
+      User.hasMany(models.LikePost, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
+      });
     }
   }
   User.init({
