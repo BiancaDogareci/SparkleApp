@@ -1,4 +1,6 @@
 import { GraphQLObjectType } from 'graphql';
+
+// General queries
 import userQuery from '../queries/userQuery.js';
 import usersQuery from '../queries/usersQuery.js';
 import postQuery from '../queries/postQuery.js';
@@ -12,6 +14,9 @@ import profilesQuery from '../queries/profilesQuery.js';
 import allLikesOfPostsQuery from '../queries/likepostsQuery.js';
 import likesOfAPostQuery from '../queries/likepostOfAPostQuery.js';
 import likesOfAUserQuery from '../queries/likepostOfAUserQuery.js';
+
+// Stats queries
+import getTop5LikedPostsQuery from '../queries/statsQueries/getTop5LikedPosts.js';
 
 const queryType = new GraphQLObjectType({
     name: "Query",
@@ -33,7 +38,9 @@ const queryType = new GraphQLObjectType({
 
         allLikesOfPosts: allLikesOfPostsQuery,
         likesOfAPost: likesOfAPostQuery,
-        likesOfAUser: likesOfAUserQuery
+        likesOfAUser: likesOfAUserQuery,
+
+        top5LikedPosts: getTop5LikedPostsQuery
     },
 });
 
