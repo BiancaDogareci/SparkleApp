@@ -18,6 +18,8 @@ import updateProfileMutation from '../mutations/updateProfileMutation.js';
 import deleteProfileMutation from '../mutations/deleteProfileMutation.js';
 import likePostMutation from '../mutations/likepostMutation.js';
 import unlikePostMutation from '../mutations/unlikepostMutation.js';
+import likeCommentMutation from '../mutations/likeCommentMutation.js';
+import unlikeCommentMutation from '../mutations/unlikeCommentMutation.js';
 
 const queryType = new graphql.GraphQLObjectType({
     name: "Mutation",
@@ -47,7 +49,10 @@ const queryType = new graphql.GraphQLObjectType({
         deleteProfile: deleteProfileMutation,
 
         likePost: likePostMutation,
-        unlikePost: unlikePostMutation
+        unlikePost: unlikePostMutation,
+
+        likeComment: likeCommentMutation,
+        unlikeComment: unlikeCommentMutation
     }
 });
 

@@ -14,6 +14,10 @@ import profilesQuery from '../queries/profilesQuery.js';
 import allLikesOfPostsQuery from '../queries/likepostsQuery.js';
 import likesOfAPostQuery from '../queries/likepostOfAPostQuery.js';
 import likesOfAUserQuery from '../queries/likepostOfAUserQuery.js';
+import likecommentOfACommentQuery from '../queries/likecommentOfACommentQuery.js';
+import likecommentOfAUserQuery from '../queries/likecommentOfAUserQuery.js';
+import allLikesOfCommentsQuery from '../queries/likecommentQuery.js';
+import repliesQuery from '../queries/repliesQuery.js';
 
 // Stats queries
 import getTop5LikedPostsQuery from '../queries/statsQueries/getTop5LikedPosts.js';
@@ -32,6 +36,7 @@ const queryType = new GraphQLObjectType({
         
         comment: commentQuery,
         comments: commentsQuery,
+        replies: repliesQuery,
 
         profile: profileQuery,
         profiles: profilesQuery,
@@ -39,6 +44,10 @@ const queryType = new GraphQLObjectType({
         allLikesOfPosts: allLikesOfPostsQuery,
         likesOfAPost: likesOfAPostQuery,
         likesOfAUser: likesOfAUserQuery,
+
+        likecommentOfAComment:likecommentOfACommentQuery,
+        likeCommentofAUser:likecommentOfAUserQuery,
+        allLikesOfComments:allLikesOfCommentsQuery,
 
         top5LikedPosts: getTop5LikedPostsQuery
     },

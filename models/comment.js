@@ -30,6 +30,11 @@ export default (sequelize, DataTypes) => {
         foreignKey: 'parentCommentId',
         as: 'childComments'
       })
+
+      Comment.hasMany(models.LikeComment, {
+        foreignKey: 'commentId',
+        onDelete: 'CASCADE',
+      });
     }
   }
   Comment.init({
