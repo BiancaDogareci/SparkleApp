@@ -2,6 +2,8 @@ import { GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLBoolean } from 'gr
 import userType from './userType.js';
 import postType from './postType.js';
 
+
+
 export const commentType = new GraphQLObjectType({
   name: 'Comment',
   fields: () => ({
@@ -28,7 +30,23 @@ export const commentType = new GraphQLObjectType({
       resolve(parentValue) {
         return parentValue.getParentComment();
       }
+    },
+
+    likeCount: {
+      type: GraphQLInt,
+      resolve: async (parentValue) => {
+        try {
+        
+          const likes = await parentValue.getLikeComments();
+          return likes.length;
+        } catch (error) {
+          console.error('Error counting likes:', error);
+          return 0;
+        }
+      }
     }
+    
+    
   })
 });
 
