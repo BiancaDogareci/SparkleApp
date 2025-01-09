@@ -21,6 +21,7 @@ import repliesQuery from '../queries/repliesQuery.js';
 
 // Stats queries
 import getTop5LikedPostsQuery from '../queries/statsQueries/getTop5LikedPosts.js';
+import getTop5CommentedPostsQuery from '../queries/statsQueries/getTop5CommentedPosts.js';
 
 const queryType = new GraphQLObjectType({
     name: "Query",
@@ -49,7 +50,8 @@ const queryType = new GraphQLObjectType({
         likeCommentofAUser:likecommentOfAUserQuery,
         allLikesOfComments:allLikesOfCommentsQuery,
 
-        top5LikedPosts: getTop5LikedPostsQuery
+        top5LikedPosts: getTop5LikedPostsQuery,
+        top5CommentedPosts: getTop5CommentedPostsQuery
     },
 });
 
