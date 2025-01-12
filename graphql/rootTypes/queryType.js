@@ -29,6 +29,7 @@ import getTop5LikedPostsQuery from '../queries/statsQueries/getTop5LikedPosts.js
 import getTop5CommentedPostsQuery from '../queries/statsQueries/getTop5CommentedPosts.js';
 import getTop5ReportedPostsQuery from '../queries/statsQueries/getTop5ReportedPosts.js';
 import getTop5ReportedUsersQuery from '../queries/statsQueries/getTop5ReportedUsers.js';
+import getTop10MostUsedLabelsQuery from '../queries/statsQueries/getTop10MostUsedLabels.js';
 
 const queryType = new GraphQLObjectType({
     name: "Query",
@@ -66,7 +67,8 @@ const queryType = new GraphQLObjectType({
         top5LikedPosts: getTop5LikedPostsQuery,
         top5CommentedPosts: getTop5CommentedPostsQuery,
         top5ReportedPosts: getTop5ReportedPostsQuery,
-        top5ReportedUsers: getTop5ReportedUsersQuery
+        top5ReportedUsers: getTop5ReportedUsersQuery,
+        top10MostUsedLabels: getTop10MostUsedLabelsQuery
     },
 });
 
