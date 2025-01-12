@@ -20,6 +20,7 @@ import likePostMutation from '../mutations/likepostMutation.js';
 import unlikePostMutation from '../mutations/unlikepostMutation.js';
 import likeCommentMutation from '../mutations/likeCommentMutation.js';
 import unlikeCommentMutation from '../mutations/unlikeCommentMutation.js';
+import createReportMutation from '../mutations/createReportMutation.js';
 
 const queryType = new graphql.GraphQLObjectType({
     name: "Mutation",
@@ -52,7 +53,9 @@ const queryType = new graphql.GraphQLObjectType({
         unlikePost: unlikePostMutation,
 
         likeComment: likeCommentMutation,
-        unlikeComment: unlikeCommentMutation
+        unlikeComment: unlikeCommentMutation,
+
+        createReport: createReportMutation,
     }
 });
 
