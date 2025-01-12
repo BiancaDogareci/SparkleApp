@@ -18,10 +18,17 @@ import likecommentOfACommentQuery from '../queries/likecommentOfACommentQuery.js
 import likecommentOfAUserQuery from '../queries/likecommentOfAUserQuery.js';
 import allLikesOfCommentsQuery from '../queries/likecommentQuery.js';
 import repliesQuery from '../queries/repliesQuery.js';
+import getNumberReportsForPostQuery from '../queries/getNumberReportsForPost.js';
+import getNumberReportsForUserQuery from '../queries/getNumberReportsForUser.js';
+import reportsOfAPostQuery from '../queries/reportsOfAPostQuery.js';
+import reportsWrittenByAUserQuery from '../queries/reportsWrittenByAUserQuery.js';
+import reportsOfAUserQuery from '../queries/reportsOfAUserQuery.js';
 
 // Stats queries
 import getTop5LikedPostsQuery from '../queries/statsQueries/getTop5LikedPosts.js';
 import getTop5CommentedPostsQuery from '../queries/statsQueries/getTop5CommentedPosts.js';
+import getTop5ReportedPostsQuery from '../queries/statsQueries/getTop5ReportedPosts.js';
+import getTop5ReportedUsersQuery from '../queries/statsQueries/getTop5ReportedUsers.js';
 
 const queryType = new GraphQLObjectType({
     name: "Query",
@@ -50,8 +57,16 @@ const queryType = new GraphQLObjectType({
         likeCommentofAUser:likecommentOfAUserQuery,
         allLikesOfComments:allLikesOfCommentsQuery,
 
+        getNumberReportsForPost: getNumberReportsForPostQuery,
+        getNumberReportsForUser: getNumberReportsForUserQuery,
+        reportsOfAPost: reportsOfAPostQuery,
+        reportsWrittenByAUser: reportsWrittenByAUserQuery,
+        reportsOfAUser: reportsOfAUserQuery,
+
         top5LikedPosts: getTop5LikedPostsQuery,
-        top5CommentedPosts: getTop5CommentedPostsQuery
+        top5CommentedPosts: getTop5CommentedPostsQuery,
+        top5ReportedPosts: getTop5ReportedPostsQuery,
+        top5ReportedUsers: getTop5ReportedUsersQuery
     },
 });
 

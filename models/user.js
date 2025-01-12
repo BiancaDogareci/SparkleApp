@@ -31,6 +31,11 @@ export default (sequelize, DataTypes) => {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
+
+      User.hasMany(models.Report, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
+      })
     }
   }
   User.init({

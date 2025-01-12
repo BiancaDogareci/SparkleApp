@@ -28,6 +28,11 @@ export default (sequelize, DataTypes) => {
         foreignKey: 'postId',
         onDelete: 'CASCADE',
       });
+
+      Post.hasMany(models.Report, {
+        foreignKey: 'postId',
+        onDelete: 'CASCADE',
+      })
     }
   }
   Post.init({
