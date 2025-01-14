@@ -1,8 +1,5 @@
 'use strict';
 
-//AICI AM MODIFICAT CU CHAT GPT TOT FOLDER-UL PT CA NU 
-//MERGEA PE WINDOWS
-
 import fs from 'fs';
 import path from 'path';
 import Sequelize from 'sequelize';

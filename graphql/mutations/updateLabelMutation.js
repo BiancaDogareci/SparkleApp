@@ -3,7 +3,12 @@ import labelInputType from '../types/labelInputType.js';
 import labelType from '../types/labelType.js';
 import db from '../../models/index.js';
 
-const updateLabelMutationResolver = async(_, args) =>{
+const updateLabelMutationResolver = async(_, args,context) =>{
+    const isAuthorized = !!context.user_id;
+    
+    if (!isAuthorized) {
+        return false;
+    }
     const id = args.id;
 
     const label = await db.Label.findOne({

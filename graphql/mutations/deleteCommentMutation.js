@@ -2,7 +2,7 @@ import { GraphQLBoolean, GraphQLInt } from 'graphql';
 import db from '../../models/index.js';
 
 const deleteCommentMutationResolver = async (_, args, context) => {
-  const isAuthorized = !!context.user_id
+    const isAuthorized = !!context.user_id
    
     if(!isAuthorized) {
         return false;
@@ -22,9 +22,9 @@ const deleteCommentMutationResolver = async (_, args, context) => {
     if(userId===comment.userId){
       await comment.destroy();
       return true;
-  }else{
+    }else{
       return false;
-  }
+    }
 }
 
 const deleteCommentMutation = {

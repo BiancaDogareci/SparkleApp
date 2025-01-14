@@ -1,0 +1,912 @@
+#CRUD USER
+
+#1. create user
+
+mutation CreateUser{
+  createUser(user: {
+    name: "Test User",
+    username: "testuser",
+    email: "testuser@example.com",
+    password: "password123"
+  }) {
+    id
+    name
+    username
+    email
+  }
+}
+
+
+
+#LOGIN
+mutation Login {
+  login(credentials: { username: "testuser", password: "password123" }) {
+    token
+  }
+}
+
+
+
+#2. update user
+
+mutation UpdateUser{
+  updateUser(
+    id: 101, 
+    user: {
+      username: "testuser1",
+    }
+  ) {
+    id
+    name
+    username
+    email
+  }
+}
+
+#3.read user
+
+query User{
+  user(id:20)
+  {
+    name
+    username
+    email
+  }
+}
+
+#4.read users
+
+query Users{
+  users
+  {
+    name
+    username
+    email
+  }
+}
+
+
+
+#CRUD PROFILE
+
+#1. create profile
+
+mutation CreateProfile {
+  createProfile(
+    profile: {
+      profilePhoto: "https://example.com/photo.jpg",
+      bio: "This is my bio.",
+      website: "https://example.com",
+      publicEmail: "user@example.com",
+      language: "en",
+      themePreference: "dark"
+    }
+  ) {
+    id
+    userId
+    user {
+      username
+    }
+    profilePhoto
+    bio
+    website
+    publicEmail
+    language
+    themePreference
+  }
+}
+
+#2. read profile
+
+query GetProfile {
+  profile(id: 31) {
+    id
+    userId
+    user {
+      id
+      username
+    }
+    profilePhoto
+    bio
+    website
+    publicEmail
+    language
+    themePreference
+  }
+}
+
+#3. read profiles
+
+query GetProfiles {
+  profiles {
+    id
+    bio
+  }
+}
+
+
+#4.update profile
+
+mutation UpdateProfile {
+  updateProfile(
+    id: 101, # Replace with the profile ID to update
+    profile: {
+      bio: "Updated bio content.",
+      website: "https://updated-example.com",
+      publicEmail: "updated-user@example.com",
+      language: "es",
+      themePreference: "light"
+    }
+  ) {
+    id
+    userId
+    profilePhoto
+    bio
+    website
+    publicEmail
+    language
+    themePreference
+  }
+}
+
+
+
+#CRUD POST
+
+#1. create post
+
+mutation CreatePost{
+  createPost(post: {
+    title: "Sample Post Title",
+    body: "This is the body of the post.",
+    labels: ["Business", "Technology", "Science"]
+  }) {
+    id
+    title
+    body
+    edited
+    labels
+    author{
+      id
+      name
+      username
+      email
+    }
+  }
+
+}
+
+#1.1 attach label to post
+
+mutation AttachLabelsToPosts{
+  attachLabelsToPosts(postId: 101, labels: ["label1","label2"])
+}
+
+#2.update post
+
+mutation UpdatePost{
+  updatePost(id: 101, post: { 
+    title: "Updated Post Title", 
+    body: "Updated content of the post.",  
+    labels: ["Tech", "GraphQL"] 
+  }) {
+    title
+    body
+    createdAt
+    updatedAt
+    author {
+      id
+      name
+      username
+    }
+    labels
+  }
+}
+
+#3. read post
+
+query Post{
+  post(id: 20) {
+    title
+    body
+    author {
+      id
+      username
+      name
+      email
+    }
+    labels
+  }
+}
+
+#4. read posts
+
+query Posts{
+  posts {
+    title
+    body
+    author {
+      id
+      username
+      name
+      email
+    }
+    labels
+  }
+}
+
+
+
+#CRUD LABEL
+
+#1. create label
+
+mutation CreateLabel {
+  createLabel(label: {name:"labelName",usage:0}) {
+    id
+    name
+    usage
+  }
+}
+
+#2.update label
+
+mutation UpdateLabel{
+  updateLabel(id: 1, label: {name:"labelName-updated"}) {
+    id
+    name
+    usage
+  }
+}
+
+#3. read label
+
+query Label{
+  label(id: 1) {
+    id
+    name
+    usage
+  }
+}
+
+#4. read labels
+
+query Labels{
+  labels {
+    id
+    name
+    usage
+  }
+}
+
+
+
+#CRUD COMMENT
+
+#1. create comment
+
+mutation CreateComment
+{
+  createComment(comment:{
+    postId: 20,
+    body:"comment"
+  })
+  {
+    id
+    body
+  }
+}
+
+#2. update comment
+
+mutation UpdateComment
+{
+  updateComment(id:31, comment:{
+    body:"comment-update",
+  })
+  {
+    id
+    body
+  }
+}
+
+#3. read comment
+
+query Comment{
+  comment(id:30){
+    id
+    body
+    post
+    {
+      title
+      body
+      labels
+    }
+    likeCount
+    parentComment
+    {
+      id
+      body
+      
+    }
+  }
+}
+
+#4. read comments
+
+query Comments{
+  comments{
+    id
+    body
+    post
+    {
+      title
+      body
+      labels
+    }
+    likeCount
+    parentComment
+    {
+      id
+      body
+      
+    }
+  }
+}
+
+
+
+#LIKE/UNLIKE comment
+
+#1.
+
+mutation LikeComment{
+  likeComment(commentId:31)
+  {
+    user
+    {
+      name
+      username
+      email
+    }
+    comment
+    {
+      body
+      likeCount
+    }
+    givenAt
+  }
+}
+
+#2.
+
+mutation UnlikeComment{
+  unlikeComment(commentId:31)
+}
+
+
+
+#LIKE COMMENT QUERIES
+
+#1.
+
+query LikeCommentofAUser{
+  likeCommentofAUser(userId: 1) {
+    userId
+    user {
+      id
+      name
+      username
+      email
+    }
+    commentId
+    comment {
+      id
+      body
+      userId
+      postId
+      parentCommentId
+      edited
+      user{
+        name
+        username
+        email
+      }
+      post{
+        title
+        body
+      }
+      parentComment{
+        id
+        body
+      }
+      likeCount
+    }
+    givenAt
+  }
+}
+
+#2.
+
+query LikeCommentOfAComment{
+  likecommentOfAComment(commentId: 1) {
+    userId
+    user {
+      id
+      name
+      username
+      email
+    }
+    commentId
+    comment {
+      id
+      body
+      userId
+      postId
+      parentCommentId
+      edited
+      user{
+        name
+      }
+      post{
+        title
+      }
+      parentComment
+      {
+        body
+      }
+      likeCount
+    }
+    givenAt
+  }
+}
+
+#3.
+
+query allLikesOfAllComments{
+  allLikesOfComments {
+    userId
+    user {
+      id
+      name
+      username
+      email
+    }
+    commentId
+    comment {
+      id
+      body
+      userId
+      postId
+      parentCommentId
+      edited
+      user
+      {
+        username
+      }
+      post
+      {
+        title
+      }
+      parentComment
+      {
+        body
+      }
+      likeCount
+    }
+    givenAt
+  }
+}
+
+
+
+#REPLIES QUERY
+
+mutation CreateCommentReply1
+{
+  createComment(comment:{
+    postId: 20,
+    body:"comment-reply1"
+    parentCommentId:31
+  })
+  {
+    id
+    body
+  }
+}
+
+mutation CreateCommentReply2
+{
+  createComment(comment:{
+    postId: 20,
+    body:"comment-reply2"
+    parentCommentId:31
+  })
+  {
+    id
+    body
+  }
+}
+
+query Replies
+{
+  replies(commentId:31)
+  {
+    body
+    user{
+      name
+      username
+      email
+    }
+    likeCount
+  }
+}
+
+
+
+#LIKES POST
+
+query GetLikesofPosts {
+  allLikesOfPosts {
+    userId
+    postId
+    givenAt
+  }
+}
+
+mutation LikePost {
+  likePost(postId: 2) {
+    userId
+    postId
+    givenAt
+  }
+}
+
+mutation UnlikePost {
+  unlikePost(postId: 2)
+}
+
+query GetLikesOfAUser {
+  likesOfAUser(userId: 1) {
+    userId
+    user {
+      id
+      name
+    }
+    postId
+    post {
+      id
+      title
+    }
+    givenAt
+  }
+}
+
+query GetLikesOfAPost {
+  likesOfAPost(postId: 1) {
+    userId
+    user {
+      id
+      name
+    }
+    postId
+    post {
+      id
+      title
+    }
+    givenAt
+  }
+}
+
+
+
+#STATS QUERIES
+
+#1.
+
+query Top10MostUsedLabels{
+  top10MostUsedLabels {
+    id
+    name
+    usage
+    posts {
+      id
+      title
+      body
+      author{
+        id
+        username
+      }
+    }
+  }
+}
+
+#2.
+
+query GetTop5ReportedUsers {
+  top5ReportedPosts {
+    id
+    title
+    body
+    reportCount
+    user {
+      id
+      name
+      username
+      email
+    }
+    reports {
+      id
+      reason
+      post{
+        id
+        body
+        labels
+      }
+    }
+  }
+}
+
+#3.
+
+query GetTop5ReportedPosts {
+  top5ReportedPosts {
+    id
+    title
+    body
+    reportCount
+    user {
+      id
+      name
+      username
+      email
+    }
+    reports {
+      id
+      reason
+      post{
+        id
+        body
+        labels
+      }
+    }
+  }
+}
+
+#4.
+
+query getTop5LikedPostsQuery{
+  top5LikedPosts{
+    id
+    title
+    body
+    User{
+      id
+      name
+      username
+    }
+    likeCount
+  }
+  
+}
+
+#5.
+
+query getTop5CommentedPostsQuery
+{ top5CommentedPosts
+  {
+    id
+    title
+    body
+    User{
+      id
+      name
+      username
+    }
+    commentCount
+    Labels
+    {
+      name
+    }
+    Comments
+    {
+      
+      id
+      body
+      
+    }
+    
+  }
+  
+}
+
+
+
+#REPORTS QUERIES
+
+#1. create report
+
+mutation createReport{
+  createReport(report: {
+    reason: "Continut inadecvat",
+    postId: 1
+  }) {
+    id
+    reason
+    createdAt
+    updatedAt
+    author {
+      id
+      name
+      username
+      email
+    }
+    post {
+      id
+      title
+      body
+      edited
+      createdAt
+      updatedAt
+      author{
+        id
+      }
+      labels
+      comments{
+        id
+      }
+    }
+  }
+}
+
+#2.
+
+query GetNumberReportsForPost{
+  getNumberReportsForPost(id: 1)
+}
+
+#3.
+
+query GetNumberReportsForUser{
+  getNumberReportsForUser(id: 1)
+}
+
+#4.
+
+query ReportsOfAPost{
+  reportsOfAPost(postId: 1) {
+    id
+    reason
+    createdAt
+    updatedAt
+    author {
+      id
+      name
+      username
+      email
+    }
+    post {
+      id
+      title
+      body
+      edited
+      createdAt
+      updatedAt
+      author{
+        id
+      }
+      labels
+      comments{
+        id
+      }
+    }
+  }
+}
+
+#5.
+
+query ReportsWrittenByAUser{
+  reportsWrittenByAUser(userId: 1) {
+    id
+    reason
+    createdAt
+    updatedAt
+    author {
+      id
+      name
+      username
+      email
+    }
+    post {
+      id
+      title
+      body
+      edited
+      createdAt
+      updatedAt
+      author{
+        id
+        username
+      }
+      labels
+      comments{
+        id
+
+      }
+    }
+  }
+}
+
+#6.
+
+query ReportsOfAUser {
+  reportsOfAUser(userId: 1) {
+    id
+    reason
+    createdAt
+    updatedAt
+    author {
+      id
+      name
+      username
+      email
+    }
+    post {
+      id
+      title
+      body
+      edited
+      createdAt
+      updatedAt
+      author{
+        id
+        username
+      }
+      labels
+      comments{
+        id
+        body
+      }
+    }
+  }
+}
+
+
+
+# DELETE la final
+
+#1. delete post
+
+mutation DeletePost
+{
+  deletePost(id:101)
+}
+
+#2.delete profile
+
+mutation DeleteProfile {
+  deleteProfile(id: 2)
+}
+
+#3.delete label
+
+mutation DeleteLabel{
+  deleteLabel(id: 1)
+}
+
+#4.delete comment
+
+  mutation DeleteComment{
+    deleteComment(id:34)
+  }
+
+#5. delete user
+
+mutation DeleteUser{
+  deleteUser(id:101)
+}
+
+
+
+
+
